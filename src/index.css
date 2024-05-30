@@ -1,0 +1,49 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  background: linear-gradient(
+    -45deg,
+    #fcbaa6,
+    #fc9879,
+    #ee8f72,
+    #fc9879,
+    #f88f6f,
+    #f3a189,
+    #f5b19d,
+    #f5c59d,
+    #eef5af,
+    #e0f3bd,
+    #b5f5a8,
+    #abf5a8,
+    #9ff3c5,
+    #9fecdf,
+    #93eef1,
+    #82c8f0,
+    #7eaee6,
+    #5aa9d6,
+    #23d5ab,
+    #88f7dd
+  );
+  background-size: 400% 400%;
+  animation: gradient 20s ease infinite;
+  min-height: 100dvh;
+  background-attachment: fixed;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+#root {
+  flex-grow: 1;
+}
