@@ -1,14 +1,15 @@
 import useSWR from "swr";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import data from "../../data.ts";
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
-const useCurrency = (currency = "eur") => {
-  return useSWR(
+const useCurrency = (currency: string) => {
+  const { data: currRates, isLoading } = useSWR(
     `https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/${currency}.json`,
     fetcher
   );
+  return { currRates, isLoading };
 };
 
 const currencies = Object.entries(data).filter(([_, value]) => value);
@@ -25,18 +26,12 @@ currencies.sort((a, b) => {
 export const Calculator = () => {
   const [from, setFrom] = useState("eur");
   const [to, setTo] = useState("rub");
-  const { data: currRates, isLoading } = useCurrency(from);
-
+  const { currRates, isLoading } = useCurrency(from);
   const [fromValue, setFromValue] = useState(0);
   const [toValue, setToValue] = useState(0);
 
   const handleFromChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setFrom(e.target.value);
-    if (fromValue) {
-      setToValue(
-        Number((fromValue * currRates[from][e.target.value]).toFixed(2))
-      );
-    }
   };
 
   const handleToChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -53,6 +48,12 @@ export const Calculator = () => {
     setToValue(Number((+e.target.value * currRates[from][to]).toFixed(2)));
   };
 
+  useEffect(() => {
+    if (currRates) {
+      setToValue(Number((fromValue * currRates[from][to]).toFixed(2)));
+    }
+  }, [from, currRates]);
+
   if (isLoading) {
     return "Initial loading...";
   }
@@ -63,10 +64,11 @@ export const Calculator = () => {
       <form className="flex flex-col px-4 gap-4">
         <div className="mb-4">
           <input
-            value={fromValue}
+            value={fromValue || ""}
             onChange={(e) => handleFromValueChange(e)}
             type="number"
-            min={0}
+            min={1}
+            placeholder="Введите сумму"
             className="me-4 h-8 border-2 border-slate-600 rounded-md px-3 py-1"
           />
           <select
