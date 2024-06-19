@@ -46,8 +46,6 @@ export const Currencies = () => {
     return "Loading...";
   }
 
-  console.log(data);
-  console.log(baseCurrency);
   return (
     <section className="max-w-xl mx-auto mt-10 flex flex-col items-center">
       <select

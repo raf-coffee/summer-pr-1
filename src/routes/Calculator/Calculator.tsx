@@ -1,5 +1,5 @@
-import useSWR from "swr";
 import { useEffect, useState } from "react";
+import useSWR from "swr";
 import data from "../../data.ts";
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
