@@ -2,7 +2,7 @@
 
 [https://github.com/appbooster/test-assignments/blob/master/tasks/frontend.md](https://github.com/appbooster/test-assignments/blob/master/tasks/frontend.md)
 
-**Ссылка на рабочий проект** - [thunderous-sawine-b4ae67.netlify.app](https://thunderous-sawine-b4ae67.netlify.app/)
+**Ссылка на проект** - [thunderous-sawine-b4ae67.netlify.app](https://thunderous-sawine-b4ae67.netlify.app/)
 
 ## Описание
 
